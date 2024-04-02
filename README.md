@@ -28,6 +28,34 @@ Final, run the serve.
 npm run dev
 ```
 
+## Backend
+
+### 
+
+First, we should active the enviornment with the command:
+
+```bash
+poetry shell
+```
+
+Then, go to the web_api, and run the command.
+
+```bash
+uvicorn main:app --reload
+```
+
+Next, open the link http://127.0.0.1:8000/.
+
+- http://127.0.0.1:8000/redoc - ReDoc
+- http://127.0.0.1:8000/docs -> Swagger
+
+If you want to deactivate, just write `exit` then click on enter.
+
+```bash
+exit
+```
+
+
 # Stack
 
 - VueJs
