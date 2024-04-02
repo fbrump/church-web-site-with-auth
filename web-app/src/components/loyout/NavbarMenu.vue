@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-
 </script>
 
 <template>
@@ -13,7 +12,13 @@ import { RouterLink } from 'vue-router'
           </span>
         </router-link>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -23,10 +28,7 @@ import { RouterLink } from 'vue-router'
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-
-          <router-link to="/" class="navbar-item" title="Go to the home page">
-            Home
-          </router-link>
+          <router-link to="/" class="navbar-item" title="Go to the home page"> Home </router-link>
 
           <router-link to="/small-groups" class="navbar-item" title="Go to the small groups">
             Small Groups
@@ -39,9 +41,7 @@ import { RouterLink } from 'vue-router'
               <a class="button is-primary">
                 <strong>Sign up</strong>
               </a>
-              <a class="button is-light">
-                Log in
-              </a>
+              <a class="button is-light"> Log in </a>
             </div>
           </div>
         </div>
