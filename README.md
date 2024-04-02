@@ -3,8 +3,31 @@ The aim is to develop a web site using VueJs, Python, Postgres, etc that all tog
 
 # How to run
 
-TBD
+## Frontend
+
+### NPM
+
+Go to the frontend project.
+
+```bash
+cd ./web-app
+```
+
+Then, install the NPM packages.
+```bash
+npm install
+```
+
+Next, format the code.
+```bash
+npm run format
+```
+
+Final, run the serve.
+```bash
+npm run dev
+```
 
 # Stack
 
-TBD
+- VueJs
