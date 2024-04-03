@@ -8,6 +8,9 @@ const pageTitle = ref('Home Page')
 <template>
   <main class="container">
     <page-header :title="pageTitle"></page-header>
+    <section class="section">
+      <p class="has-text-centered">Welcome to the Church Web Site</p>
+    </section>
   </main>
 </template>
 
