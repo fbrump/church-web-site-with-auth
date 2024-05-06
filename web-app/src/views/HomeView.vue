@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import PageHeader from './../components/PageHeader.vue'
+import PageHeader from '@/components/PageHeader.vue'
 
 const pageTitle = ref('Home Page')
 </script>

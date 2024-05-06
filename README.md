@@ -58,4 +58,6 @@ exit
 
 # Stack
 
-- VueJs
+- [VueJs](https://vuejs.org/)
+- [Bulma CSS V1](https://bulma.io/documentation/elements/button/)
+- [Font Awesome V6.5.2](https://fontawesome.com/)

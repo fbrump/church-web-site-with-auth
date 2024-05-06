@@ -20,7 +20,8 @@ const router = createRouter({
     {
       path: '/small-groups/:id',
       name: 'small-groups-details',
-      component: SmallGroupDetailsView
+      component: SmallGroupDetailsView,
+      props: true
     }
   ]
 })
