@@ -1,5 +1,7 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { logout } from '@/storage/auth-resource';
+import { RouterLink } from 'vue-router';
+
 </script>
 
 <template>
@@ -38,10 +40,10 @@ import { RouterLink } from 'vue-router'
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <router-link to="login" class="button is-light"> Log in </router-link>
+              <button @click="logout" class="button is-danger is-light">
+                <strong>Logout</strong>
+              </button>
+              <router-link to="login" class="button is-link is-light"> Log in </router-link>
             </div>
           </div>
         </div>
