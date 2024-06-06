@@ -58,6 +58,7 @@ exit
 
 # Stack
 
+- [FastAPI](https://fastapi.tiangolo.com/)
 - [VueJs](https://vuejs.org/)
 - [Bulma CSS V1](https://bulma.io/documentation/elements/button/)
 - [Font Awesome V6.5.2](https://fontawesome.com/)
