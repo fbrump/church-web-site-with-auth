@@ -1,15 +1,13 @@
-from typing import Union
-
 from fastapi import FastAPI
+
+import models
+from database import engine
+from routers import addresses, small_groups
+
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+app.include_router(small_groups.router, prefix="/api/v1")
+app.include_router(addresses.router, prefix="/api/v1")
