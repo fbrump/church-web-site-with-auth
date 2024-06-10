@@ -36,5 +36,9 @@ class SmallGroupBase(BaseModel):
     finish_at: str | None = None
     is_active: bool
 
+class SmallGroup(SmallGroupBase):
+    is_active: bool
     contact_phones: list[ContactPhone] = []
     address: Address
+    class Config:
+        orm_mode = True
