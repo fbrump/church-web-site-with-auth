@@ -40,13 +40,20 @@ async def read_small_group(small_group_id: UUID, db: Session = Depends(get_db)) 
     small_group = repository.get_small_group(db, small_group_id)
     print(small_group)
     if not small_group:
-        raise HTTPException(status_code=400, detail="Small group didn't find")
+        raise HTTPException(status_code=400, detail="Small group does not find")
     return small_group
 
 @app.get("/small-groups/{small_group_id}/addresses/", response_model=schemas.Address)
 async def read_small_groups_addresses(small_group_id: UUID, db: Session = Depends(get_db)) -> schemas.Address:
     addresses = repository.get_address_by_small_group(db, small_group_id)
     return addresses
+
+@app.get("/small-groups/{small_group_id}/addresses/{address_id}", response_model=schemas.Address)
+async def read_small_groups_addresses(small_group_id: UUID, address_id:int, db: Session = Depends(get_db)) -> schemas.Address:
+    address = repository.get_address_by_id(db, small_group_id, address_id)
+    if not address:
+        raise HTTPException(status_code=400, detail="Address does not find")
+    return address
 
 @app.get("/small-groups/{small_group_id}/contacts/", response_model=list[schemas.ContactPhone])
 async def read_small_group_contacts(small_group_id: UUID, db: Session = Depends(get_db)) -> list[schemas.ContactPhone]:

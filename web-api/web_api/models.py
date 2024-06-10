@@ -28,7 +28,7 @@ class ContactPhone(Base):
     number = Column(String(10), nullable=False)
     reference = Column(String(160), nullable=True)
     
-    small_group_id: Mapped[Uuid] = mapped_column(ForeignKey("small_groups.id"))
+    small_group_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("small_groups.id"))
     small_group: Mapped["SmallGroup"] = relationship(back_populates="contact_phones")
 
 class Address(Base):
@@ -44,6 +44,6 @@ class Address(Base):
     state = Column(String(160), nullable=False)
     country = Column(String(160), nullable=False)
     
-    small_group_id = Column(Uuid, ForeignKey("small_groups.id"))
+    small_group_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("small_groups.id"))
     small_group: Mapped["SmallGroup"] = relationship(back_populates="address", single_parent=True)
   
