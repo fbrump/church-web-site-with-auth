@@ -21,9 +21,9 @@ class ContactPhone(Base):
     __tablename__ = "contact_phones"
     
     id = Column(Integer, primary_key=True)
-    country_code = Column(String)
-    number = Column(String)
-    reference = Column(String)
+    country_code = Column(String(4), nullable=False)
+    number = Column(String(10), nullable=False)
+    reference = Column(String(160), nullable=True)
     
     small_group_id = Column(Uuid, ForeignKey("small_groups.id"))
     small_group = relationship("SmallGroup", back_populates="contact_phones")
@@ -32,17 +32,14 @@ class Address(Base):
     __tablename__ = "addresses"
     
     id = Column(Integer, primary_key=True)
-    country_code = Column(String)
-    number = Column(String)
-
-    street = Column(String(160))
-    reference = Column(String(250))
-    number = Column(String(5)) # models.CharField(max_length=5, null=True, blank=True)
-    zip_code = Column(String(9)) # models.CharField(max_length=9, null=True, blank=True)
+    street = Column(String(160), nullable=False)
+    reference = Column(String(250), nullable=True)
+    number = Column(String(5), nullable=True) # models.CharField(max_length=5, null=True, blank=True)
+    zip_code = Column(String(9), nullable=True) # models.CharField(max_length=9, null=True, blank=True)
     neighborhood = Column(String(50)) # models.CharField(max_length=50)
-    city = Column(String(160)) # models.CharField(max_length=160)
-    state = Column(String(160)) # models.CharField(max_length=160)
-    country = Column(String(160)) # models.CharField(max_length=160)
+    city = Column(String(160), nullable=False) # models.CharField(max_length=160)
+    state = Column(String(160), nullable=False) # models.CharField(max_length=160)
+    country = Column(String(160), nullable=False) # models.CharField(max_length=160)
     
     small_group_id = Column(Uuid, ForeignKey("small_groups.id"))
     small_group = relationship("SmallGroup", back_populates="address", single_parent=True)
