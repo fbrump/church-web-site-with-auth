@@ -40,14 +40,8 @@ def get_small_group_by_title(db: Session, title: str):
 def get_address_by_small_group(db: Session, small_group_id: UUID):
     return db.query(models.Address).filter(models.Address.small_group_id == small_group_id).first()
 
-def get_address_by_id(db: Session, small_group_id: UUID, address_id:int):
-    address = db.query(models.Address).get(address_id)
-    if address and not address.small_group_id == small_group_id:
-        print(f"Small Group ID is different")
-        print(f"Database: {address.small_group_id}")
-        print(f"Filter: {small_group_id}")
-        return None
-    return address
+def get_address_by_id(db: Session, address_id:int):
+    return db.query(models.Address).get(address_id)
 
 def get_contact_phones_by_small_group(db: Session, small_group_id: int):
     return db.query(models.ContactPhone).filter(models.ContactPhone.small_group_id == small_group_id).all()
