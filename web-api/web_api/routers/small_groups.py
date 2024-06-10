@@ -23,7 +23,7 @@ async def read_small_groups(skip: int = 0, limit: int = 100, db: Session = Depen
 def create_small_group(small_group: schemas.SmallGroupCreate, db: Session = Depends(get_db)):
     db_small_group = repository.get_small_group_by_title(db, title=small_group.title)
     if db_small_group:
-        raise HTTPException(status_code=400, detail="Small group already registered")
+        raise HTTPException(status_code=400)
     return repository.create_small_group(db=db, small_group=small_group)
 
 @router.get("/small-groups/{small_group_id}/", response_model=schemas.SmallGroup)
@@ -32,7 +32,7 @@ async def read_small_group(small_group_id: UUID, db: Session = Depends(get_db)) 
     small_group = repository.get_small_group(db, small_group_id)
     print(small_group)
     if not small_group:
-        raise HTTPException(status_code=400, detail="Small group does not find")
+        raise HTTPException(status_code=400)
     return small_group
 
 @router.get("/small-groups/{small_group_id}/addresses/", response_model=schemas.Address)

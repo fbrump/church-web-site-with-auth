@@ -16,5 +16,5 @@ router = APIRouter(
 async def read_small_groups_addresses(address_id:int, db: Session = Depends(get_db)) -> schemas.Address:
     address = repository.get_address_by_id(db, address_id)
     if not address:
-        raise HTTPException(status_code=400, detail="Address does not find")
+        raise HTTPException(status_code=404)
     return address
