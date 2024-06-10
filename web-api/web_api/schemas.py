@@ -11,7 +11,7 @@ class ContactPhone(ContactPhoneBase):
     id: UUID
     small_group_id: UUID
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class AddressBase(BaseModel):
     street: str
@@ -23,22 +23,28 @@ class AddressBase(BaseModel):
     state: str
     country: str
 
+class AddressCreate(AddressBase):
+    ...
+
 class Address(AddressBase):
     id: int
     small_group_id: UUID
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class SmallGroupBase(BaseModel):
     title: str
     weekday: str | None = None
     start_at: str | None = None
     finish_at: str | None = None
-    is_active: bool
+
+class SmallGroupCreate(SmallGroupBase):
+    address: AddressCreate
 
 class SmallGroup(SmallGroupBase):
+    id: UUID
     is_active: bool
     contact_phones: list[ContactPhone] = []
     address: Address
     class Config:
-        orm_mode = True
+        from_attributes = True

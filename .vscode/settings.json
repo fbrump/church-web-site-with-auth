@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "sql_local",
+            "database": "${workspaceFolder:church-web-site-with-auth}/web-api/web_api/sql_app.db"
+        }
+    ]
+}

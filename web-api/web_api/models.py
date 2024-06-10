@@ -1,21 +1,24 @@
-from sqlalchemy import Boolean, Column, ForeignKey, String, Integer, Time, Uuid
-from sqlalchemy.orm import relationship
+import uuid
+from typing import List
 
-from .database import Base
+from sqlalchemy import Boolean, Column, ForeignKey, String, Integer, Uuid
+from sqlalchemy.orm import relationship, Mapped, mapped_column
+
+from database import Base
 
 
 class SmallGroup(Base):
     __tablename__ = "small_groups"
 
-    id = Column(Uuid, primary_key=True)
+    id: Mapped[uuid.UUID]= mapped_column(primary_key=True, default=uuid.uuid4)
     title = Column(String, unique=True, index=True)
     weekday = Column(String)
-    start_at = Column(Time)
-    finish_at = Column(Time)
+    start_at = Column(String(5))
+    finish_at = Column(String(5))
     is_active = Column(Boolean, default=True)
     
-    contact_phones = relationship("ContactPhone", back_populates="small_group")
-    address = relationship("Address", back_populates="small_group")
+    contact_phones: Mapped[List["ContactPhone"]] = relationship(back_populates="small_group")
+    address: Mapped["Address"] = relationship(back_populates="small_group")
 
 class ContactPhone(Base):
     __tablename__ = "contact_phones"
@@ -25,8 +28,8 @@ class ContactPhone(Base):
     number = Column(String(10), nullable=False)
     reference = Column(String(160), nullable=True)
     
-    small_group_id = Column(Uuid, ForeignKey("small_groups.id"))
-    small_group = relationship("SmallGroup", back_populates="contact_phones")
+    small_group_id: Mapped[Uuid] = mapped_column(ForeignKey("small_groups.id"))
+    small_group: Mapped["SmallGroup"] = relationship(back_populates="contact_phones")
 
 class Address(Base):
     __tablename__ = "addresses"
@@ -42,5 +45,5 @@ class Address(Base):
     country = Column(String(160), nullable=False)
     
     small_group_id = Column(Uuid, ForeignKey("small_groups.id"))
-    small_group = relationship("SmallGroup", back_populates="address", single_parent=True)
+    small_group: Mapped["SmallGroup"] = relationship(back_populates="address", single_parent=True)
   
