@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import PageHeader from '@/components/PageHeader.vue'
-import { getSmallGroup } from '@/storage/small-group-resource'
+import { useSmallGroupStore } from '@/store/small-group';
+
 
 var props = defineProps({
   id: {
@@ -10,8 +11,13 @@ var props = defineProps({
   }
 })
 
-const pageTitle = ref('Small Group Details')
-const itemDetails = ref(getSmallGroup(props.id))
+const smallGroupStore = useSmallGroupStore();
+
+smallGroupStore.getById(props.id);
+
+const itemDetails = computed(() => smallGroupStore.selected);
+
+const pageTitle = ref('Small Group Details');
 </script>
 
 <template>
