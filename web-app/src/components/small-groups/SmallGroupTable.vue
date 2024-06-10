@@ -1,13 +1,17 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { getSmallGroups } from '@/storage/small-group-resource'
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useSmallGroupStore } from '@/store/small-group';
 
 defineProps({
   filterParameter: Object
 })
 
-var items = ref(getSmallGroups())
+const smallGroupStore = useSmallGroupStore();
+
+smallGroupStore.load();
+
+var items = computed(() => smallGroupStore.all)
 </script>
 
 <template>
