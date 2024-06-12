@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { computed } from 'vue'
+import { computed, defineProps } from 'vue'
 import { useSmallGroupStore } from '@/store/small-group';
 
 defineProps({

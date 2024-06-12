@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, defineProps } from 'vue'
 import PageHeader from '@/components/PageHeader.vue'
 import { useSmallGroupStore } from '@/store/small-group';
 
