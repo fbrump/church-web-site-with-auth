@@ -7,7 +7,7 @@ export const useSmallGroupStore = defineStore('small-group', {
       detailed: (state) => state.selected,
     },
     actions: {
-      load() {
+      async load() {
         // TO-DO: Call API
         this.items = [
           {
