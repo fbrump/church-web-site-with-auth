@@ -26,8 +26,8 @@ const pageTitle = ref('Small Group Details');
     <section>
       <p>Let's be part of the {{ itemDetails.title }} group too!</p>
       <p>
-        Every {{ itemDetails.weekday }} at {{ itemDetails.startAt }} (and ending at
-        {{ itemDetails.finishAt }}).
+        Every {{ itemDetails.weekday }} at {{ itemDetails.start_at }} (and ending at
+        {{ itemDetails.finish_at }}).
       </p>
     </section>
   </main>
