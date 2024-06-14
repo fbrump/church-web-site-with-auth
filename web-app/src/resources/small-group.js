@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const getAll = async () => {
   axios
-    .get('http://localhost:8000/api/v1/small-groups/small-groups/?skip=0&limit=100', {
+    .get('/api/small-groups/small-groups/?skip=0&limit=100', {
       headers: {
         'Content-Type': 'application/json'
       }
