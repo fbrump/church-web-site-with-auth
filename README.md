@@ -64,5 +64,6 @@ exit
 - [VueJs](https://vuejs.org/)
 - [Vue Router](https://router.vuejs.org/)
 - [Pinia](https://pinia.vuejs.org/)
+- [Axios](https://axios-http.com/docs/intro)
 - [Bulma CSS V1](https://bulma.io/documentation/elements/button/)
 - [Font Awesome V6.5.2](https://fontawesome.com/)
