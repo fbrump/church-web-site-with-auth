@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getAll } from '@/resources/small-group';
+import { getAll, getById } from '@/resources/small-group';
 
 
 export const useSmallGroupStore = defineStore('small-group', {
@@ -16,11 +16,15 @@ export const useSmallGroupStore = defineStore('small-group', {
           })
           .catch((error) => console.error(error));
       },
-      getById(id) {
-        // TO-DO: Call API
-        this.load();
-        const filtered = this.all.filter((item) => item.id === id);
-        this.selected = filtered.length === 1 ? filtered[0] : null;
+      async getById(id) {
+        getById(id)
+          .then((response) => {
+            this.selected = response.data;
+          })
+          .catch((error) => {
+            this.selected = null;
+            console.error(error)
+          });
       },
     },
   })
