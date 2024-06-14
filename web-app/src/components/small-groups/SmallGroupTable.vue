@@ -33,8 +33,8 @@ var items = computed(() => smallGroupStore.all)
         <tr v-for="item in items" :key="item.id">
           <td>{{ item.title }}</td>
           <td>{{ item.weekday }}</td>
-          <td>{{ item.startAt }}H</td>
-          <td>{{ item.finishAt }}H</td>
+          <td>{{ item.start_at }}H</td>
+          <td>{{ item.finish_at }}H</td>
           <td class="has-text-centered">
             <router-link :to="'/small-groups/' + item.id" class="button is-ghost">
               <span class="icon">
