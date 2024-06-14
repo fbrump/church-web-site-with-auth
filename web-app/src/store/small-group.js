@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { getAll } from '@/resources/small-group';
+
 
 export const useSmallGroupStore = defineStore('small-group', {
     state: () => ({ items: [], selected: null }),
@@ -7,7 +9,8 @@ export const useSmallGroupStore = defineStore('small-group', {
       detailed: (state) => state.selected,
     },
     actions: {
-      load() {
+      async load() {
+        getAll();
         // TO-DO: Call API
         this.items = [
           {
