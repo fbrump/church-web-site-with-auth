@@ -1,7 +1,9 @@
+from typing import Union
 from uuid import UUID
-from sqlalchemy.orm import Session
 
-import models, schemas
+import models
+import schemas
+from sqlalchemy.orm import Session
 
 
 def get_small_group(db: Session, small_group_id: UUID):
@@ -71,19 +73,52 @@ def get_user_by_username(db: Session, username: str) -> models.User:
     return db.query(models.User).filter(models.User.username == username).first()
 
 
-def get_user_by_token(db: Session, token: str):
+def get_user_by_token(db: Session, token: str) -> models.User:
     return db.query(models.User).filter(models.User.hashed_password == token).first()
 
 
-def create_user(db: Session, user: schemas.UserInDB):
+def create_user(db: Session, user: schemas.UserInDB) -> models.User:
     db_user = models.User(
         username=user.username,
         hashed_password=user.hashed_password,
         email=user.email,
         full_name=user.full_name,
         disabled=user.disabled,
+        client_id=user.client_id,
+        client_secret=user.client_secret,
     )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+    db.commit()
+    db.refresh(db_user)
     return db_user
+
+
+def get_token(db: Session, token: str):
+    return db.query(models.Token).filter(models.Token.token == token).first()
+
+
+def create_token(db: Session, token: str, user_id: int):
+    db_token = models.Token(token=token, user_id=user_id)
+    db.add(db_token)
+    db.commit()
+    db.refresh(db_token)
+    return db_token
+
+
+def update_user_scopes(
+    db: Session, user_scopes: schemas.UserScope
+) -> schemas.UserScope:
+    db.query(models.UserScope).filter(
+        models.UserScope.user_id == user_scopes.user_id
+    ).delete()
+    if user_scopes.scopes:
+        for scope in user_scopes.scopes:
+            db.add(
+                models.UserScope(
+                    user_id=user_scopes.user_id, scope=models.ScopeEnum(scope)
+                )
+            )
+    db.commit()
+    return user_scopes

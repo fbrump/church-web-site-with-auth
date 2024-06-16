@@ -1,10 +1,18 @@
+import enum
 import uuid
 from typing import List
 
-from sqlalchemy import Boolean, Column, ForeignKey, String, Integer
-from sqlalchemy.orm import relationship, Mapped, mapped_column
-
 from database import Base
+from sqlalchemy import Boolean, Column, Enum, ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+
+class ScopeEnum(enum.Enum):
+    ACCOUNT_READ = "account:read"
+    ACCOUNT_WRITE = "account:write"
+    SMALL_GROUP_READ = "small-group:read"
+    SMALL_GROUP_WRITE = "small-group:write"
+    ADDRESS_READ = "address:read"
 
 
 class SmallGroup(Base):
@@ -62,4 +70,24 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     email = Column(String(250), nullable=True)
     full_name = Column(String(250), nullable=True)
+    client_id = Column(String, nullable=True)
+    client_secret = Column(String, nullable=True)
     disabled = Column(Boolean, default=True)
+    scopes: Mapped[List["UserScope"]] = relationship(back_populates="user")
+
+
+class UserScope(Base):
+    __tablename__ = "user_scopes"
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    scope = Column(Enum(ScopeEnum), nullable=False)
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"))
+    user: Mapped["User"] = relationship(back_populates="scopes")
+
+
+class Token(Base):
+    __tablename__ = "tokens"
+
+    id = Column(Integer, primary_key=True, index=True)
+    token = Column(String, index=True)
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"))
