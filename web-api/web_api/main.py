@@ -1,10 +1,8 @@
-from fastapi import FastAPI
-
 import models
 from database import engine
-from routers import addresses, small_groups, accounts
+from fastapi import FastAPI
 from middlewares.cors import setup_cors
-
+from routers import accounts, addresses, small_groups
 
 models.Base.metadata.create_all(bind=engine)
 

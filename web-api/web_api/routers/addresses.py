@@ -1,12 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, Security
-from sqlalchemy.orm import Session
 from typing import Annotated
 
-import schemas
 import repository
+import schemas
 from dependencies import get_db
-from middlewares.auth import oauth2_scheme, Scope
-from routers.accounts import get_current_user
+from fastapi import APIRouter, Depends, HTTPException, Security
+from middlewares.auth import Scope, get_current_user, oauth2_scheme
+from sqlalchemy.orm import Session
 
 router = APIRouter(
     prefix="/addresses",
@@ -18,9 +17,11 @@ router = APIRouter(
 
 @router.get("/{address_id}", response_model=schemas.Address)
 async def read_small_groups_addresses(
-    address_id: int, 
-    current_user: Annotated[schemas.User, Security(get_current_user, scopes=[Scope.ADDRESS_READ])], 
-    db: Session = Depends(get_db)
+    address_id: int,
+    current_user: Annotated[
+        schemas.User, Security(get_current_user, scopes=[Scope.ADDRESS_READ])
+    ],
+    db: Session = Depends(get_db),
 ) -> schemas.Address:
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
