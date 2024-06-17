@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getHeaders from '.';
 
 const SCOPES = [
   'small-group:read'
@@ -17,4 +18,11 @@ const getToken = async (username, password) => {
     });
 };
 
-export { getToken };
+const getUser = async () => {
+  return await axios
+    .get('/api-auth/accounts/users/me/', {
+      headers: getHeaders()
+    });
+};
+
+export { getToken, getUser };
