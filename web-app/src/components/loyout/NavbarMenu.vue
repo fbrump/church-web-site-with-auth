@@ -1,6 +1,11 @@
 <script setup>
-import { logout } from '@/storage/auth-resource';
 import { RouterLink } from 'vue-router';
+import { useAuthStore }  from '@/store/auth';
+
+const authStore = useAuthStore();
+
+const isAuthenticated = () => authStore.isAuthenticated;
+const logout = () => authStore.logout();
 
 </script>
 
@@ -40,10 +45,10 @@ import { RouterLink } from 'vue-router';
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <button @click="logout" class="button is-danger is-light">
+              <button v-if="isAuthenticated()" @click="logout" class="button is-danger is-light">
                 <strong>Logout</strong>
               </button>
-              <router-link to="login" class="button is-link is-light"> Log in </router-link>
+              <router-link v-if="!isAuthenticated()" to="login" class="button is-link is-light"> Log in </router-link>
             </div>
           </div>
         </div>

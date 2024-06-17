@@ -1,13 +1,15 @@
 <script setup>
-import { login } from '@/storage/auth-resource';
+import { useAuthStore }  from '@/store/auth';
 import { ref } from 'vue';
+
+const authStore = useAuthStore();
 
 const username = ref('');
 const password = ref('');
 const rememberMe = ref(false);
 
-function onSubmitLogin() {
-    login(username.value, password.value);
+const onSubmitLogin = async () => {
+    await authStore.login(username.value, password.value);
 }
 
 </script>
@@ -23,7 +25,7 @@ function onSubmitLogin() {
                         <div class="field">
                             <label for="" class="label">Email</label>
                             <div class="control has-icons-left">
-                                <input type="email" v-model="username" placeholder="e.g. bobsmith@gmail.com" class="input" required>
+                                <input type="text" v-model="username" placeholder="e.g. bobsmith@gmail.com" class="input" required>
                                 <span class="icon is-small is-left">
                                 <i class="fa fa-envelope"></i>
                                 </span>
