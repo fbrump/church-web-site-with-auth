@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { getToken } from '@/resources/auth';
+import router from '@/router';
 
 
 export const useAuthStore = defineStore('auth', () => {
@@ -24,14 +25,21 @@ export const useAuthStore = defineStore('auth', () => {
     await getToken(username, password)
     .then((response) => {
       updateToken(response.data);
+      router.push('/');
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      console.error(error);
+      router.push('/login');
+    });
   }
 
   const logout = () => {
-    isAuthenticated.value = false;
-    user = null;
-    token = null;
+    console.log('logout')
+    authenticated.value = false;
+    user.value = null;
+    token.value = null;
+
+    router.push('/login');
   }
 
   return { 

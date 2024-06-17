@@ -5,7 +5,7 @@ import { useAuthStore }  from '@/store/auth';
 const authStore = useAuthStore();
 
 const isAuthenticated = () => authStore.isAuthenticated;
-const logout = () => authStore.logout();
+const logout = () => { authStore.logout(); }
 
 </script>
 
