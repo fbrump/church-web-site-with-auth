@@ -17,10 +17,15 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
+      '/api-core': {
         target: 'http://localhost:8000/api/v1/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api-core/, ''),
+      },
+      '/api-auth': {
+        target: 'http://localhost:8000/api/v1/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-auth/, ''),
       }
     }
   }
