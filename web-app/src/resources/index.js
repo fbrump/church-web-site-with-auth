@@ -9,7 +9,7 @@ const getHeaders = () =>  {
 
   if (authStore.isAuthenticated)
   {
-    headers['Authorization'] = 'Bearer ' + authStore.token; 
+    headers['Authorization'] = 'Bearer ' + authStore.getCurrentToken.access_token; 
   }
   
   return headers;
