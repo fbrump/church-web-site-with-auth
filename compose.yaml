@@ -1,0 +1,8 @@
+services:
+  backend:
+    name: church-web-site-with-auth-backend
+    build:
+      context: ./web-api
+      dockerfile: Containerfile
+    expose:
+      - 8081:80
