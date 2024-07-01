@@ -1,0 +1,27 @@
+services:
+  backend:
+    container_name: church-web-site-with-auth-backend
+    build:
+      context: ./web-api
+      dockerfile: Containerfile
+  
+  backend-proxy:
+    container_name: church-web-site-with-auth-backend-proxy
+    build:
+      context: ./web-api/nginx
+      dockerfile: Containerfile
+    ports:
+      - 8081:80
+      - 443:443
+    depends_on:
+      - backend
+  
+  frontend:
+    container_name: church-web-site-with-auth-frontend
+    build:
+      context: ./web-app
+      dockerfile: Containerfile
+    ports:
+      - 8082:80
+    depends_on:
+      - backend-proxy
