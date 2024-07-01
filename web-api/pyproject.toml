@@ -12,6 +12,8 @@ uvicorn = {extras = ["standard"], version = "^0.29.0"}
 black = "^24.3.0"
 sqlalchemy = "^2.0.30"
 passlib = "^1.7.4"
+pyjwt = "^2.8.0"
+python-multipart = "^0.0.9"
 
 
 [build-system]

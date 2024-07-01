@@ -30,7 +30,7 @@ npm run dev
 
 ## Backend
 
-### 
+### Uvicorn
 
 First, we should active the enviornment with the command:
 
@@ -55,6 +55,50 @@ If you want to deactivate, just write `exit` then click on enter.
 exit
 ```
 
+## Container File
+
+Here, we just need to jump to web-api folder.
+
+```bash
+
+cd web-api
+
+```
+
+Then, build a new image.
+
+```bash
+
+docker build -f Containerfile -t web-api:v1 . 
+
+```
+
+Next, run it.
+
+```bash
+
+docker run -p 8000:8080 web-api:v1
+
+```
+
+Final, open the link http://localhost:8000/.
+
+- http://localhost:8000/redoc - ReDoc
+- http://localhost:8000/docs -> Swagger
+
+## Compose
+
+As an alternative, we can exeucte the compose to turn up all infrastructure.
+
+In the root, just execute the command.
+
+```bash
+
+docker compose down && docker compose up --build
+
+```
+
+It will work to Docker and Podman with podman-compose.
 
 # Stack
 
