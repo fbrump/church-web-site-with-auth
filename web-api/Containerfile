@@ -1,18 +1,23 @@
-FROM python:3.11-slim
+FROM python:3.11-alpine as requirements-stage
 
-RUN mkdir /app 
-
-COPY  /web_api /app
-COPY pyproject.toml /app
-COPY poetry.lock /app
-
-WORKDIR /app/
-ENV PYTHONPATH=${PYTHONPATH}:${PWD}
+WORKDIR /tmp
 
 RUN pip3 install poetry
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-dev
+
+COPY ./pyproject.toml ./poetry.lock* /tmp/
+
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+
+FROM python:3.11-alpine as build-stage
+
+WORKDIR /app
+
+COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
+
+RUN pip3 install --no-cache-dir --upgrade -r /app/requirements.txt
+
+COPY  /web_api /app
 
 EXPOSE 8080
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "8080"]
