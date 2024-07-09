@@ -17,7 +17,7 @@ router = APIRouter(
 
 
 # API
-@router.get("/small-groups/", response_model=list[schemas.SmallGroup])
+@router.get("/", response_model=list[schemas.SmallGroup])
 async def read_small_groups(
     current_user: Annotated[
         schemas.User, Security(get_current_user, scopes=[Scope.SMALL_GROUP_READ])
@@ -32,7 +32,7 @@ async def read_small_groups(
     return small_groups
 
 
-@router.post("/small-groups/", response_model=schemas.SmallGroup)
+@router.post("/", response_model=schemas.SmallGroup)
 def create_small_group(
     small_group: schemas.SmallGroupCreate,
     current_user: Annotated[
@@ -48,7 +48,7 @@ def create_small_group(
     return repository.create_small_group(db=db, small_group=small_group)
 
 
-@router.get("/small-groups/{small_group_id}/", response_model=schemas.SmallGroup)
+@router.get("/{small_group_id}", response_model=schemas.SmallGroup)
 async def read_small_group(
     small_group_id: UUID,
     current_user: Annotated[
@@ -64,7 +64,7 @@ async def read_small_group(
     return small_group
 
 
-@router.get("/small-groups/{small_group_id}/addresses/", response_model=schemas.Address)
+@router.get("/{small_group_id}/addresses/", response_model=schemas.Address)
 async def read_small_groups_addresses(
     small_group_id: UUID,
     current_user: Annotated[
@@ -79,7 +79,7 @@ async def read_small_groups_addresses(
 
 
 @router.get(
-    "/small-groups/{small_group_id}/contacts/",
+    "/{small_group_id}/contacts/",
     response_model=list[schemas.ContactPhone],
 )
 async def read_small_group_contacts(
