@@ -83,6 +83,9 @@ class UserScope(Base):
     scope = Column(Enum(ScopeEnum), nullable=False)
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"))
     user: Mapped["User"] = relationship(back_populates="scopes")
+    def __str__(self):
+        return self.scope
+    
 
 
 class Token(Base):

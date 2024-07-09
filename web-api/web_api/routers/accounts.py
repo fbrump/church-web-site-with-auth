@@ -100,6 +100,7 @@ async def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         disabled=user.disabled,
         client_id=user.client_id,
         client_secret=user.client_secret,
+        scopes=user.scopes
     )
     return repository.create_user(db=db, user=schema_user)
 
