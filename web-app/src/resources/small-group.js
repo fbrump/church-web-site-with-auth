@@ -1,19 +1,16 @@
-import axios from 'axios';
-import getHeaders from '.';
-
+import axios from 'axios'
+import getHeaders from '.'
 
 const getAll = async () => {
-  return await axios
-    .get('/api-core/small-groups/small-groups/?skip=0&limit=100', {
-      headers: getHeaders()
-    });
-};
+  return await axios.get('/api-core/small-groups/small-groups/?skip=0&limit=100', {
+    headers: getHeaders()
+  })
+}
 
 const getById = async (id) => {
-  return await axios
-    .get('/api-core/small-groups/small-groups/' + id, {
-      headers: getHeaders()
-    });
-};
+  return await axios.get('/api-core/small-groups/small-groups/' + id, {
+    headers: getHeaders()
+  })
+}
 
-export { getAll, getById };
+export { getAll, getById }
