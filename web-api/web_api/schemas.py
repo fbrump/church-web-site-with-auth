@@ -80,11 +80,9 @@ class UserBase(BaseModel):
     disabled: Union[bool, None] = False
     client_id: Union[str, None] = None
     client_secret: Union[str, None] = None
-
+    scopes: list[str] = []
 
 class User(UserBase):
-    scopes: Union[list[str], None] = None
-
     def mapper(model: models.User):
         return User(
             username=model.username,

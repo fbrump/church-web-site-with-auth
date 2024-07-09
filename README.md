@@ -87,7 +87,7 @@ uvicorn main:app --reload
 
 Next, open the link http://127.0.0.1:8000/.
 
-- http://127.0.0.1:8000/redoc - ReDoc
+- http://127.0.0.1:8000/redoc -> ReDoc
 - http://127.0.0.1:8000/docs -> Swagger
 
 If you want to deactivate, just write `exit` then click on enter.
