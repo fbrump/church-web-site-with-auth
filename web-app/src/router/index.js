@@ -6,7 +6,6 @@ import SmallGroupDetailsView from '@/views/small-groups/SmallGroupDetailsView.vu
 import LogInView from '@/views/auth/LogInView.vue'
 import { useAuthStore } from '@/store/auth'
 
-
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,14 +18,14 @@ const router = createRouter({
       path: '/small-groups',
       name: 'small-groups',
       component: SmallGroupView,
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true }
     },
     {
       path: '/small-groups/:id',
       name: 'small-groups-details',
       component: SmallGroupDetailsView,
       props: true,
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -36,21 +35,19 @@ const router = createRouter({
   ]
 })
 
-
-router.beforeEach(async (to, from)=> {
-  const authStore = useAuthStore();
-	if (to.meta?.requiresAuth ) {
-    if (authStore.getCurrentToken !== null){
+router.beforeEach(async (to, from) => {
+  const authStore = useAuthStore()
+  if (to.meta?.requiresAuth) {
+    if (authStore.getCurrentToken !== null) {
       console.info('User Loged')
-      authStore.updateToken(authStore.getCurrentToken);
-      await authStore.updateUser();
+      authStore.updateToken(authStore.getCurrentToken)
+      await authStore.updateUser()
     }
 
-    if (!authStore.isAuthenticated) return '/login';
-	}
-  else{
-    console.info("NOT requires AUTH")
+    if (!authStore.isAuthenticated) return '/login'
+  } else {
+    console.info('NOT requires AUTH')
   }
-});
+})
 
 export default router
